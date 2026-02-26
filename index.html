@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Anindya Sakya Mukti ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Pacifico&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --pink-soft: #ffe5ec; --pink-medium: #ffb3c1; --pink-dark: #ff758f; --text-color: #594145; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Quicksand', sans-serif; background-color: var(--pink-soft); color: var(--text-color); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        #container { width: 90%; max-width: 450px; height: 600px; background: white; border-radius: 30px; box-shadow: 0 20px 40px rgba(255,117,143,0.2); position: relative; padding: 40px 20px; text-align: center; overflow: hidden; }
+        .slide { display: none; height: 100%; flex-direction: column; justify-content: center; align-items: center; }
+        .slide.active { display: flex; animation: slideIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        h1 { font-family: 'Pacifico', cursive; color: var(--pink-dark); font-size: 1.8rem; margin: 10px 0; }
+        h2 { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--pink-dark); margin: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .btn { background-color: var(--pink-dark); color: white; border: none; padding: 12px 28px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: 0.3s; box-shadow: 0 5px 15px rgba(255,117,143,0.4); }
+        .btn:hover { transform: scale(1.1); background-color: #fa5e7d; }
+        
+        /* Frame Foto Estetik */
+        .photo-placeholder {
+            width: 220px; height: 220px; background: white;
+            border: 8px solid white; box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
+            margin: 10px auto; overflow: hidden; position: relative;
+        }
+        .photo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        .miring-kanan { transform: rotate(5deg); } 
+        .miring-kiri { transform: rotate(-5deg); }
+
+        /* Cake & Candle */
+        .cake { width: 120px; height: 80px; background: #fb6f92; border-radius: 10px 10px 0 0; margin: 20px auto 0; position: relative; }
+        .candle { width: 12px; height: 35px; background: #fff; position: absolute; top: -35px; left: 50%; transform: translateX(-50%); border-top: 5px solid #ffde59; }
+        .flame { width: 15px; height: 25px; background: #ffbd00; border-radius: 50% 50% 20% 20%; position: absolute; top: -25px; left: -1.5px; animation: flicker 0.1s infinite alternate; }
+        @keyframes flicker { from { transform: scale(1); } to { transform: scale(1.2); } }
+    </style>
+</head>
+<body>
+
+<audio id="laguSedih" src="sedih.mp3" preload="auto" loop></audio>
+<audio id="laguCeria" src="ceria.mp3" preload="auto" loop></audio>
+
+<div id="container">
+    <div class="slide active">
+        <p>Ehem...</p>
+        <h2>Tunggu dulu...</h2>
+        <p>INI HARI APA SIH? 🤔</p>
+        <button class="btn" onclick="putarSedih(); next(0)">Coba cek kalender</button>
+    </div>
+
+    <div class="slide"><h2>OHIYA!</h2><p>Kayaknya ada yang ulang tahun ya hari ini?</p><button class="btn" onclick="next(1)">Kasih tau gak ya?</button></div>
+    <div class="slide"><h2>BISA TEBAK GAK NIN?</h2><p>Clue: Orangnya manis & hari ini 18 tahun! 🌸</p><button class="btn" onclick="next(2)">Spill Namanya!</button></div>
+    <div class="slide"><p>EH Iya...</p><h1>Anindya Sakya Mukti</h1><p>Udah Makin Tua ya, wleeee 😜🎂</p><button class="btn" onclick="next(3)">Lanjut</button></div>
+    <div class="slide"><h2>Selamat Ulang Tahun!</h2><p>HBD ke-18 Nin (26/02/2026). ✨</p><button class="btn" onclick="next(4)">Amin!</button></div>
+    <div class="slide"><h2>Banyak Doa Buat Kamu..</h2><p>Sehat selalu & selalu dalam lindungan Allah SWT.</p><button class="btn" onclick="next(5)">Ada lagi?</button></div>
+    <div class="slide"><h2>Harapan Terbesar..</h2><p>Semoga Nin <b>LULUS di PTN impian</b>! 🎓🔥</p><button class="btn" onclick="next(6)">Semangat!</button></div>
+    <div class="slide"><h2>Eh iya...</h2><p>Mas kasih kado apa ya? 🤔</p><button class="btn" onclick="next(7)">Apa tuh mas?</button></div>
+    <div class="slide"><h2>Maaf ya... 🥺</h2><p>Mas Ifan belum bisa kasih apa-apa yang mewah.</p><button class="btn" onclick="next(8)">Gapapa kok mas</button></div>
+
+    <div class="slide"><h2>TAPI...</h2><p>Ada kejutan kecil buat Anin!</p><button class="btn" onclick="transisiKeCeria(); next(9)">Cek sekarang</button></div>
+
+    <div class="slide">
+        <h2>Tiup Lilinnya! 🎂</h2>
+        <div class="cake"><div class="candle"><div class="flame" id="flame"></div></div></div>
+        <button class="btn" id="btnTiup" onclick="tiup()">TIUP LILINNYA 🌬️</button>
+    </div>
+
+    <div class="slide">
+        <div class="photo-placeholder miring-kiri"><img src="foto1.jpg" alt="Foto 1"></div>
+        <p><strong>Semoga Anindya Sakya Mukti...</strong></p>
+        <p>Selalu jadi orang yang rendah hati.</p>
+        <button class="btn" onclick="next(11)">Next</button>
+    </div>
+
+    <div class="slide">
+        <div class="photo-placeholder miring-kanan"><img src="foto2.jpg" alt="Foto 2"></div>
+        <p>Makin dewasa dan bijaksana.</p>
+        <button class="btn" onclick="next(12)">Lanjut</button>
+    </div>
+
+    <div class="slide">
+        <div class="photo-placeholder miring-kiri"><img src="foto3.jpg" alt="Foto 3"></div>
+        <p>Bahagia terus setiap harinya!</p>
+        <button class="btn" onclick="next(13)">Lanjut lagi</button>
+    </div>
+
+    <div class="slide">
+        <div class="photo-placeholder miring-kanan"><img src="foto4.jpg" alt="Foto 4"></div>
+        <p>Jangan pernah menyerah ya!</p>
+        <button class="btn" onclick="next(14)">Dikit lagi..</button>
+    </div>
+
+    <div class="slide">
+        <div class="photo-placeholder miring-kiri"><img src="foto5.jpg" alt="Foto 5"></div>
+        <p>Mas Ifan selalu dukung Nin!</p>
+        <button class="btn" onclick="next(15)">Terakhir</button>
+    </div>
+
+    <div class="slide">
+        <h1>HBD Ke-18 Anin!</h1>
+        <p>Bahagia selalu ya cantik! 🥳✨</p>
+        <p style="font-size: 0.8rem;">- dari Mas Ifan -</p>
+        <button class="btn" onclick="location.reload()">Ulangi</button>
+    </div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const laguSedih = document.getElementById('laguSedih');
+    const laguCeria = document.getElementById('laguCeria');
+
+    function next(index) {
+        slides[index].classList.remove('active');
+        slides[index+1].classList.add('active');
+    }
+
+    function putarSedih() {
+        laguSedih.volume = 0; laguSedih.play();
+        let fadeIn = setInterval(() => {
+            if (laguSedih.volume < 1) laguSedih.volume = Math.min(1, laguSedih.volume + 0.1);
+            else clearInterval(fadeIn);
+        }, 200);
+    }
+
+    function transisiKeCeria() {
+        let fadeOut = setInterval(() => {
+            if (laguSedih.volume > 0.1) laguSedih.volume -= 0.1;
+            else { clearInterval(fadeOut); laguSedih.pause(); 
+                   laguCeria.volume = 0; laguCeria.play();
+                   let fadeInC = setInterval(() => {
+                       if (laguCeria.volume < 1) laguCeria.volume = Math.min(1, laguCeria.volume + 0.1);
+                       else clearInterval(fadeInC);
+                   }, 200);
+            }
+        }, 100);
+    }
+
+    function tiup() {
+        document.getElementById('flame').style.display = 'none';
+        var end = Date.now() + 3000;
+        (function frame() {
+            confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff758f', '#ffb3c1'] });
+            confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff758f', '#ffb3c1'] });
+            if (Date.now() < end) requestAnimationFrame(frame);
+        }());
+        document.getElementById('btnTiup').innerText = 'LILIN PADAM! LANJUT';
+        document.getElementById('btnTiup').onclick = function() { next(10) };
+    }
+</script>
+</body>
+</html>
